@@ -1,36 +1,34 @@
 /* ---------------------------------------------------------------------------------------
 * Template Helper CSS
 * 
-* Template:		Sepia - Photography Portfolio HTML Website Template
+* Template:		Aivo - Multipurpose Portfolio HTML Website Template
 * Author:		Themetorium
 * URL:			https://themetorium.net
 *
-* Template main color: #08c1b8;
-*
 * You are free to use these extra prepared helper classes to customize your web site.
+* Template main color (Blue): #0040d8;
 --------------------------------------------------------------------------------------- */
-
 
 /* Table of Content
 ====================
-# Various classes
-# Hiding classes
-# Background image classes
-# Font classes
-# Hover classes
-# Width classes
-# Height classes
-# Center align classes
-# Text color classes
-# Link color classes
-# Background color classes
-# Background transparent color classes
-# Background transparent gradient color classes
-# Rounded classes
-# Borders classes
-# Paddings classes
-# Margin classes
-# Bootstrap responsive columns of same height
+1. Various classes
+2. Hiding classes
+3. Background image classes
+4. Font classes
+5. Hover classes
+6. Width classes
+7. Height classes
+8. Center align classes
+9. Text color classes
+10. Link color classes
+11. Background color classes
+12. Background transparent color classes
+13. Background transparent gradient color classes
+14. Rounded classes
+15. Borders classes
+16. Paddings classes
+17. Margin classes
+18. Bootstrap responsive columns of same height
 */
 
 
@@ -40,7 +38,7 @@
 
 /* clear */
 .clear { clear: both !important; display: block !important; }
-.clear:after {
+.clear::after {
 	content: "";
 	display: table;
 	clear: both;
@@ -89,7 +87,7 @@
 
 /* display element on light or dark style only (handled by file: "dark-style.css") */
 .for-light-style {}
-.for-dark-style { display: none; }
+.for-dark-style {}
 
 
 /* ------------------------------------------------------------- *
@@ -99,16 +97,16 @@
 .hide { display: none !important; }
 
 /* Hiding via media query breakpoints */
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
 	.hide-from-lg { display: none !important; }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
 	.hide-from-md { display: none !important; }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 	.hide-from-sm { display: none !important; }
 }
-@media (max-width: 480px) {
+@media (max-width: 479px) {
 	.hide-from-xs { display: none !important; }
 }
 
@@ -151,9 +149,10 @@
 	background-size: inherit !important;
 }
 
-/* if parallax background classes enabled (more info: file "theme.css") */
+/* if parallax background classes enabled (more info: file "theme.js") */
 .bg-image[class*="parallax-bg-"] {
 	background-position: 50% 0;
+	background-attachment: fixed
 }
 
 
@@ -365,20 +364,26 @@
 	width: 100%;
 	height: 100%;
  }
-/* f.full-height-vh { min-height: 100vh !important; } */
-
-/* full height vh offset (same as header height) */
-.full-height-vh { 
-	min-height: calc(100vh - 82px) !important; 
-}
-@media (max-width: 768px) {
-	.full-height-vh { min-height: calc(100vh - 62px) !important; }
-}
-
-/* full height vh if transparent header enabled */
-body.header-transparent-on .full-height-vh {
-	min-height: 100vh !important; 
-}
+.full-height-vh { min-height: 100vh !important; }
+.height-vh-5 { min-height: 5vh !important; }
+.height-vh-10 { min-height: 10vh !important; }
+.height-vh-15 { min-height: 15vh !important; }
+.height-vh-20 { min-height: 20vh !important; }
+.height-vh-25 { min-height: 25vh !important; }
+.height-vh-30 { min-height: 30vh !important; }
+.height-vh-35 { min-height: 35vh !important; }
+.height-vh-40 { min-height: 40vh !important; }
+.height-vh-45 { min-height: 45vh !important; }
+.height-vh-50 { min-height: 50vh !important; }
+.height-vh-55 { min-height: 55vh !important; }
+.height-vh-60 { min-height: 60vh !important; }
+.height-vh-65 { min-height: 65vh !important; }
+.height-vh-70 { min-height: 70vh !important; }
+.height-vh-75 { min-height: 75vh !important; }
+.height-vh-80 { min-height: 80vh !important; }
+.height-vh-85 { min-height: 85vh !important; }
+.height-vh-90 { min-height: 90vh !important; }
+.height-vh-95 { min-height: 95vh !important; }
 
 
 /* minimum height classes */
@@ -449,6 +454,8 @@ body.header-transparent-on .full-height-vh {
 .padding-height-130 { padding-bottom: 130% !important; }
 .padding-height-135 { padding-bottom: 135% !important; }
 .padding-height-140 { padding-bottom: 140% !important; }
+.padding-height-145 { padding-bottom: 145% !important; }
+.padding-height-150 { padding-bottom: 150% !important; }
 
 
 /* -------------------------------------------------------------------------- *
@@ -490,7 +497,7 @@ body.header-transparent-on .full-height-vh {
  *  Text color classes
 /* ------------------------------------------------------------- */
 
-.text-main { color: #08c1b8 !important; } /* Template main color */
+.text-main { color: #0040d8 !important; } /* Template main color */
 .text-white { color: #FFF !important; }
 .text-gray { color: #888 !important; }
 .text-gray-2 { color: #CCC !important; }
@@ -511,7 +518,7 @@ body.header-transparent-on .full-height-vh {
  *  Link color classes
 /* ------------------------------------------------------------- */
 
-.link-main a { color: #08c1b8 !important; } /* Template main color */
+.link-main a { color: #0040d8 !important; } /* Template main color */
 .link-white a { color: #FFF !important; }
 .link-gray a { color: #888 !important; }
 .link-gray-2 a { color: #CCC !important; }
@@ -532,14 +539,15 @@ body.header-transparent-on .full-height-vh {
  *  Background color classes
 /* ------------------------------------------------------------- */
 
-.bg-main { background-color: #08c1b8 !important; } /* Template main color */
+.bg-main { background-color: #0040d8 !important; } /* Template main color */
 .bg-white { background-color: #FFF !important; }
-.bg-gray { background-color: rgba(138, 138, 138, 0.87) !important; }
-.bg-gray-2 { background-color: rgba(138, 138, 138, 0.14) !important; }
-.bg-gray-3 { background-color: rgba(138, 138, 138, 0.13) !important; }
-.bg-dark { background-color: #000 !important; }
-.bg-dark-2 { background-color: #111 !important; }
-.bg-dark-3 { background-color: #222 !important; }
+.bg-gray { background-color: #dadbdc !important; }
+.bg-gray-2 { background-color: #e7e7e8 !important; }
+.bg-gray-3 { background-color: #f0f0f3 !important; }
+.bg-dark { background-color: #13161b !important; }
+.bg-dark-2 { background-color: #191b21 !important; }
+.bg-dark-3 { background-color: #2b2e35 !important; }
+.bg-dark-4 { background-color: #20253a !important; }
 .bg-green { background-color: #0BC35B !important; }
 .bg-blue { background-color: #3042B3 !important; }
 .bg-yellow { background-color: #FFE800 !important; }
@@ -554,28 +562,28 @@ body.header-transparent-on .full-height-vh {
 /* ------------------------------------------------------------- */
 
 /* 100% transparent */
-.bg-transparent { background-color: rgba(0, 0, 0, 0) !important; }
+.bg-transparent { background-color: rgba(2, 4, 8, 0) !important; }
 
 /* Background dark transparent classes (opacity 0.5 to 9.5) */
-.bg-transparent-0-5-dark { background-color: rgba(0, 0, 0, 0.05) !important; }
-.bg-transparent-1-dark { background-color: rgba(0, 0, 0, 0.1) !important; }
-.bg-transparent-1-5-dark { background-color: rgba(0, 0, 0, 0.15) !important; }
-.bg-transparent-2-dark { background-color: rgba(0, 0, 0, 0.2) !important; }
-.bg-transparent-2-5-dark { background-color: rgba(0, 0, 0, 0.25) !important; }
-.bg-transparent-3-dark { background-color: rgba(0, 0, 0, 0.3) !important; }
-.bg-transparent-3-5-dark { background-color: rgba(0, 0, 0, 0.35) !important; }
-.bg-transparent-4-dark { background-color: rgba(0, 0, 0, 0.4) !important; }
-.bg-transparent-4-5-dark { background-color: rgba(0, 0, 0, 0.45) !important; }
-.bg-transparent-5-dark { background-color: rgba(0, 0, 0, 0.5) !important; }
-.bg-transparent-5-5-dark { background-color: rgba(0, 0, 0, 0.55) !important; }
-.bg-transparent-6-dark { background-color: rgba(0, 0, 0, 0.6) !important; }
-.bg-transparent-6-5-dark { background-color: rgba(0, 0, 0, 0.65) !important; }
-.bg-transparent-7-dark { background-color: rgba(0, 0, 0, 0.7) !important; }
-.bg-transparent-7-5-dark { background-color: rgba(0, 0, 0, 0.75) !important; }
-.bg-transparent-8-dark { background-color: rgba(0, 0, 0, 0.8) !important; }
-.bg-transparent-8-5-dark { background-color: rgba(0, 0, 0, 0.85) !important; }
-.bg-transparent-9-dark { background-color: rgba(0, 0, 0, 0.9) !important; }
-.bg-transparent-9-5-dark { background-color: rgba(0, 0, 0, 0.95) !important; }
+.bg-transparent-0-5-dark { background-color: rgba(2, 4, 8, 0.05) !important; }
+.bg-transparent-1-dark { background-color: rgba(2, 4, 8, 0.1) !important; }
+.bg-transparent-1-5-dark { background-color: rgba(2, 4, 8, 0.15) !important; }
+.bg-transparent-2-dark { background-color: rgba(2, 4, 8, 0.2) !important; }
+.bg-transparent-2-5-dark { background-color: rgba(2, 4, 8, 0.25) !important; }
+.bg-transparent-3-dark { background-color: rgba(2, 4, 8, 0.3) !important; }
+.bg-transparent-3-5-dark { background-color: rgba(2, 4, 8, 0.35) !important; }
+.bg-transparent-4-dark { background-color: rgba(2, 4, 8, 0.4) !important; }
+.bg-transparent-4-5-dark { background-color: rgba(2, 4, 8, 0.45) !important; }
+.bg-transparent-5-dark { background-color: rgba(2, 4, 8, 0.5) !important; }
+.bg-transparent-5-5-dark { background-color: rgba(2, 4, 8, 0.55) !important; }
+.bg-transparent-6-dark { background-color: rgba(2, 4, 8, 0.6) !important; }
+.bg-transparent-6-5-dark { background-color: rgba(2, 4, 8, 0.65) !important; }
+.bg-transparent-7-dark { background-color: rgba(2, 4, 8, 0.7) !important; }
+.bg-transparent-7-5-dark { background-color: rgba(2, 4, 8, 0.75) !important; }
+.bg-transparent-8-dark { background-color: rgba(2, 4, 8, 0.8) !important; }
+.bg-transparent-8-5-dark { background-color: rgba(2, 4, 8, 0.85) !important; }
+.bg-transparent-9-dark { background-color: rgba(2, 4, 8, 0.9) !important; }
+.bg-transparent-9-5-dark { background-color: rgba(2, 4, 8, 0.95) !important; }
 
 /* Background white transparent classes (opacity 0.5 to 9.5) */
 .bg-transparent-0-5-white { background-color: rgba(255, 255, 255, 0.05) !important; }
@@ -598,6 +606,27 @@ body.header-transparent-on .full-height-vh {
 .bg-transparent-9-white { background-color: rgba(255, 255, 255, 0.9) !important; }
 .bg-transparent-9-5-white { background-color: rgba(255, 255, 255, 0.95) !important; }
 
+/* Background color (template main color) transparent classes (opacity 0.5 to 9.5) */
+.bg-transparent-0-5-color { background-color: #0040d8 !important; opacity: .05; }
+.bg-transparent-1-color { background-color: #0040d8 !important; opacity: .1; }
+.bg-transparent-1-5-color { background-color: #0040d8 !important; opacity: .15; }
+.bg-transparent-2-color { background-color: #0040d8 !important; opacity: .2; }
+.bg-transparent-2-5-color { background-color: #0040d8 !important; opacity: .25; }
+.bg-transparent-3-color { background-color: #0040d8 !important; opacity: .3; }
+.bg-transparent-3-5-color { background-color: #0040d8 !important; opacity: .35; }
+.bg-transparent-4-color { background-color: #0040d8 !important; opacity: .4; }
+.bg-transparent-4-5-color { background-color: #0040d8 !important; opacity: .45; }
+.bg-transparent-5-color { background-color: #0040d8 !important; opacity: .5; }
+.bg-transparent-5-5-color { background-color: #0040d8 !important; opacity: .55; }
+.bg-transparent-6-color { background-color: #0040d8 !important; opacity: .6; }
+.bg-transparent-6-5-color { background-color: #0040d8 !important; opacity: .65; }
+.bg-transparent-7-color { background-color: #0040d8 !important; opacity: .7; }
+.bg-transparent-7-5-color { background-color: #0040d8 !important; opacity: .75; }
+.bg-transparent-8-color { background-color: #0040d8 !important; opacity: .8; }
+.bg-transparent-8-5-color { background-color: #0040d8 !important; opacity: .85; }
+.bg-transparent-9-color { background-color: #0040d8 !important; opacity: .9; }
+.bg-transparent-9-5-color { background-color: #0040d8 !important; opacity: .95; }
+
 
 /* ------------------------------------------------------------------ *
  *  Background transparent gradient color classes 
@@ -606,17 +635,17 @@ body.header-transparent-on .full-height-vh {
 
 .bg-transparent-gradient-light {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f3f3f3+0,f3f3f3+100&0.9+0,1+100 */
-	background: -moz-linear-gradient(top,  rgba(243,243,243,0.9) 0%, rgba(243,243,243,1) 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top,  rgba(243,243,243,0.9) 0%,rgba(243,243,243,1) 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom,  rgba(243,243,243,0.9) 0%,rgba(243,243,243,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f3f3f3', endColorstr='#f3f3f3',GradientType=0 ); /* IE6-9 */
+	background: -moz-linear-gradient(top, rgba(243,243,243,0.9) 0%, #fff 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, rgba(243,243,243,0.9) 0%, #fff 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, rgba(243,243,243,0.9) 0%, #fff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f3f3f3', endColorstr='#fff',GradientType=0 ); /* IE6-9 */
 }
 .bg-transparent-gradient-dark {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,111111+100&0.5+0,1+100 */
-	background: -moz-linear-gradient(top,  rgba(0,0,0,0.5) 0%, rgba(17,17,17,1) 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.5) 0%,rgba(17,17,17,1) 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom,  rgba(0,0,0,0.5) 0%,rgba(17,17,17,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#111111',GradientType=0 ); /* IE6-9 */
+	background: -moz-linear-gradient(top, rgba(24, 28, 37, 0.4) 0%, #13161b 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, rgba(24, 28, 37, 0.4) 0%, #13161b 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, rgba(24, 28, 37, 0.4) 0%, #13161b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#13161b',GradientType=0 ); /* IE6-9 */
 }
 
 
@@ -637,11 +666,11 @@ body.header-transparent-on .full-height-vh {
  *  Borders classes
 /* ------------------------------------------------------------- */
 
-.border { border: 1px solid rgba(132, 132, 132, 0.13) !important; }
-.border-top { border-top: 1px solid rgba(132, 132, 132, 0.13) !important; }
-.border-bottom { border-bottom: 1px solid rgba(132, 132, 132, 0.13) !important; }
-.border-left { border-left: 1px solid rgba(132, 132, 132, 0.13) !important; }
-.border-right { border-right: 1px solid rgba(132, 132, 132, 0.13) !important; }
+.border { border: 1px solid rgba(132, 132, 132, 0.15) !important; }
+.border-top { border-top: 1px solid rgba(132, 132, 132, 0.15) !important; }
+.border-bottom { border-bottom: 1px solid rgba(132, 132, 132, 0.15) !important; }
+.border-left { border-left: 1px solid rgba(132, 132, 132, 0.15) !important; }
+.border-right { border-right: 1px solid rgba(132, 132, 132, 0.15) !important; }
 
 /* no border classes */
 .no-border { border: none !important; }
@@ -750,11 +779,11 @@ body.header-transparent-on .full-height-vh {
 .border-right-outset { border-right-style: outset !important; }
 
 /* border color classes */
-.border-main { border-color: #08c1b8 !important; } /* template main color */
-.border-top-main { border-top-color: #08c1b8 !important; } /* template main color */
-.border-bottom-main { border-bottom-color: #08c1b8 !important; } /* template main color */
-.border-left-main { border-left-color: #08c1b8 !important; } /* template main color */
-.border-right-main { border-right-color: #08c1b8 !important; } /* template main color */
+.border-main { border-color: #0040d8 !important; } /* template main color */
+.border-top-main { border-top-color: #0040d8 !important; } /* template main color */
+.border-bottom-main { border-bottom-color: #0040d8 !important; } /* template main color */
+.border-left-main { border-left-color: #0040d8 !important; } /* template main color */
+.border-right-main { border-right-color: #0040d8 !important; } /* template main color */
 
 .border-white { border-color: #FFF !important; }
 .border-top-white { border-top-color: #FFF !important; }
@@ -1466,6 +1495,6 @@ body.header-transparent-on .full-height-vh {
 .row-lg-height,
 .row-md-height,
 .row-sm-height {
-	overflow: hidden;
+	/* overflow: hidden; */
 	/* margin-left: -1px; */
 }

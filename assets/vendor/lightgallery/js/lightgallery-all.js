@@ -1,9 +1,9 @@
-/*! lightgallery - v1.8.2 - 2020-09-01
+/*! lightgallery - v1.6.10 - 2018-05-01
 * http://sachinchoolur.github.io/lightGallery/
-* Copyright (c) 2020 Sachin N; Licensed GPLv3 */
-/*! lightgallery - v1.8.2 - 2020-09-01
+* Copyright (c) 2018 Sachin N; Licensed GPLv3 */
+/*! lightgallery - v1.6.10 - 2018-05-01
 * http://sachinchoolur.github.io/lightGallery/
-* Copyright (c) 2020 Sachin N; Licensed GPLv3 */
+* Copyright (c) 2018 Sachin N; Licensed GPLv3 */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
@@ -41,12 +41,6 @@
         hideBarsDelay: 6000,
 
         useLeft: false,
-
-        // aria-labelledby attribute fot gallery
-        ariaLabelledby: '',
-        
-        //aria-describedby attribute for gallery
-        ariaDescribedby: '',
 
         closable: true,
         loop: true,
@@ -305,25 +299,20 @@
         // Create controlls
         if (this.s.controls && this.$items.length > 1) {
             controls = '<div class="lg-actions">' +
-                '<button type="button" aria-label="Previous slide" class="lg-prev lg-icon">' + this.s.prevHtml + '</button>' +
-                '<button type="button" aria-label="Next slide" class="lg-next lg-icon">' + this.s.nextHtml + '</button>' +
+                '<button class="lg-prev lg-icon">' + this.s.prevHtml + '</button>' +
+                '<button class="lg-next lg-icon">' + this.s.nextHtml + '</button>' +
                 '</div>';
         }
 
         if (this.s.appendSubHtmlTo === '.lg-sub-html') {
-            subHtmlCont = '<div role="status" aria-live="polite" class="lg-sub-html"></div>';
+            subHtmlCont = '<div class="lg-sub-html"></div>';
         }
 
-        var ariaLabelledby = this.s.ariaLabelledby ?
-            'aria-labelledby="' + this.s.ariaLabelledby + '"' : '';
-        var ariaDescribedby = this.s.ariaDescribedby ?
-            'aria-describedby="' + this.s.ariaDescribedby + '"' : '';
-
-        template = '<div tabindex="-1" aria-modal="true" ' + ariaLabelledby + ' ' + ariaDescribedby + ' role="dialog" class="lg-outer ' + this.s.addClass + ' ' + this.s.startClass + '">' +
+        template = '<div class="lg-outer ' + this.s.addClass + ' ' + this.s.startClass + '">' +
             '<div class="lg" style="width:' + this.s.width + '; height:' + this.s.height + '">' +
             '<div class="lg-inner">' + list + '</div>' +
             '<div class="lg-toolbar lg-group">' +
-            '<button type="button" aria-label="Close gallery" class="lg-close lg-icon"></button>' +
+            '<span class="lg-close lg-icon"></span>' +
             '</div>' +
             controls +
             subHtmlCont +
@@ -332,7 +321,6 @@
 
         $('body').append(template);
         this.$outer = $('.lg-outer');
-        this.$outer.focus();
         this.$slide = this.$outer.find('.lg-item');
 
         if (this.s.useLeft) {
@@ -390,7 +378,7 @@
         }, this.s.backdropDuration);
 
         if (this.s.download) {
-            this.$outer.find('.lg-toolbar').append('<a id="lg-download" aria-label="Download" target="_blank" download class="lg-download lg-icon"></a>');
+            this.$outer.find('.lg-toolbar').append('<a id="lg-download" target="_blank" download class="lg-download lg-icon"></a>');
         }
 
         // Store the current scroll top value to scroll back after closing the gallery..
@@ -449,17 +437,17 @@
         }
 
         if (!src) {
-            if (html) {
+            if(html) {
                 return {
                     html5: true
                 };
             } else {
-                console.error('lightGallery :- data-src is not provided on slide item ' + (index + 1) + '. Please make sure the selector property is properly configured. More info - http://sachinchoolur.github.io/lightGallery/demos/html-markup.html');
+                console.error('lightGallery :- data-src is not pvovided on slide item ' + (index + 1) + '. Please make sure the selector property is properly configured. More info - http://sachinchoolur.github.io/lightGallery/demos/html-markup.html');
                 return false;
             }
         }
 
-        var youtube = src.match(/\/\/(?:www\.)?youtu(?:\.be|be\.com|be-nocookie\.com)\/(?:watch\?v=|embed\/)?([a-z0-9\-\_\%]+)/i);
+        var youtube = src.match(/\/\/(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=|embed\/)?([a-z0-9\-\_\%]+)/i);
         var vimeo = src.match(/\/\/(?:www\.)?vimeo.com\/([0-9a-z\-_]+)/i);
         var dailymotion = src.match(/\/\/(?:www\.)?dai.ly\/([0-9a-z\-_]+)/i);
         var vk = src.match(/\/\/(?:www\.)?(?:vk\.com|vkontakte\.ru)\/(?:video_ext\.php\?)(.*)/i);
@@ -489,7 +477,7 @@
      */
     Plugin.prototype.counter = function() {
         if (this.s.counter) {
-            $(this.s.appendCounterTo).append('<div id="lg-counter" role="status" aria-live="polite"><span id="lg-counter-current">' + (parseInt(this.index, 10) + 1) + '</span> / <span id="lg-counter-all">' + this.$items.length + '</span></div>');
+            $(this.s.appendCounterTo).append('<div id="lg-counter"><span id="lg-counter-current">' + (parseInt(this.index, 10) + 1) + '</span> / <span id="lg-counter-all">' + this.$items.length + '</span></div>');
         }
     };
 
@@ -606,7 +594,6 @@
         var _srcset;
         var _sizes;
         var _html;
-        var _alt;
         var getResponsiveSrc = function(srcItms) {
             var rsWidth = [];
             var rsSrc = [];
@@ -640,7 +627,6 @@
 
             _html = _this.s.dynamicEl[index].html;
             _src = _this.s.dynamicEl[index].src;
-            _alt = _this.s.dynamicEl[index].alt;
 
             if (_this.s.dynamicEl[index].responsive) {
                 var srcDyItms = _this.s.dynamicEl[index].responsive.split(',');
@@ -651,23 +637,22 @@
             _sizes = _this.s.dynamicEl[index].sizes;
 
         } else {
-            var $currentEle = _this.$items.eq(index);
-            if ($currentEle.attr('data-poster')) {
+
+            if (_this.$items.eq(index).attr('data-poster')) {
                 _hasPoster = true;
-                _poster = $currentEle.attr('data-poster');
+                _poster = _this.$items.eq(index).attr('data-poster');
             }
 
-            _html = $currentEle.attr('data-html');
-            _src = $currentEle.attr('href') || $currentEle.attr('data-src');
-            _alt = $currentEle.attr('title') || $currentEle.find('img').first().attr('alt');
+            _html = _this.$items.eq(index).attr('data-html');
+            _src = _this.$items.eq(index).attr('href') || _this.$items.eq(index).attr('data-src');
 
-            if ($currentEle.attr('data-responsive')) {
-                var srcItms = $currentEle.attr('data-responsive').split(',');
+            if (_this.$items.eq(index).attr('data-responsive')) {
+                var srcItms = _this.$items.eq(index).attr('data-responsive').split(',');
                 getResponsiveSrc(srcItms);
             }
 
-            _srcset = $currentEle.attr('data-srcset');
-            _sizes = $currentEle.attr('data-sizes');
+            _srcset = _this.$items.eq(index).attr('data-srcset');
+            _sizes = _this.$items.eq(index).attr('data-sizes');
 
         }
 
@@ -704,8 +689,7 @@
                 _this.$slide.eq(index).prepend('<div class="lg-video-cont "><div class="lg-video"></div></div>');
                 _this.$el.trigger('hasVideo.lg', [index, _src, _html]);
             } else {
-                _alt = _alt ? 'alt="' + _alt + '"' : '';
-                _this.$slide.eq(index).prepend('<div class="lg-img-wrap"><img class="lg-object lg-image" ' + _alt + ' src="' + _src + '" /></div>');
+                _this.$slide.eq(index).prepend('<div class="lg-img-wrap"><img class="lg-object lg-image" src="' + _src + '" /></div>');
             }
 
             _this.$el.trigger('onAferAppendSlide.lg', [index]);
@@ -1276,7 +1260,7 @@
                 }
 
             });
-
+            
             _this.$outer.on('mousemove.lg', function() {
                 mousedown = false;
             });
@@ -1324,7 +1308,7 @@
         // Unbind all events added by lightGallery
         this.$el.off('.lg.tm');
 
-        // destroy all lightGallery modules
+        // Distroy all lightGallery modules
         $.each($.fn.lightGallery.modules, function(key) {
             if (_this.modules[key]) {
                 _this.modules[key].destroy();
@@ -1354,7 +1338,6 @@
             if (!d) {
                 _this.$el.trigger('onCloseAfter.lg');
             }
-            _this.$el.focus();
 
         }, _this.s.backdropDuration + 50);
     };
@@ -1380,9 +1363,9 @@
 
 }));
 
-/*! lg-autoplay - v1.2.1 - 2020-06-13
+/*! lg-autoplay - v1.0.4 - 2017-03-28
 * http://sachinchoolur.github.io/lightGallery
-* Copyright (c) 2020 Sachin N; Licensed GPLv3 */
+* Copyright (c) 2017 Sachin N; Licensed GPLv3 */
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -1390,13 +1373,13 @@
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
-  } else if (typeof module === 'object' && module.exports) {
+  } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
     module.exports = factory(require('jquery'));
   } else {
-    factory(root["jQuery"]);
+    factory(jQuery);
   }
 }(this, function ($) {
 
@@ -1527,7 +1510,7 @@
     // Manage autoplay via play/stop buttons
     Autoplay.prototype.controls = function() {
         var _this = this;
-        var _html = '<button type="button" aria-label="Toggle autoplay" class="lg-autoplay-button lg-icon"></button>';
+        var _html = '<span class="lg-autoplay-button lg-icon"></span>';
 
         // Append autoplay controls
         $(this.core.s.appendAutoplayControlsTo).append(_html);
@@ -1587,9 +1570,9 @@
 
 }));
 
-/*! lg-fullscreen - v1.2.1 - 2020-06-13
+/*! lg-fullscreen - v1.0.1 - 2016-09-30
 * http://sachinchoolur.github.io/lightGallery
-* Copyright (c) 2020 Sachin N; Licensed GPLv3 */
+* Copyright (c) 2016 Sachin N; Licensed GPLv3 */
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -1597,13 +1580,13 @@
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
-  } else if (typeof module === 'object' && module.exports) {
+  } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
     module.exports = factory(require('jquery'));
   } else {
-    factory(root["jQuery"]);
+    factory(jQuery);
   }
 }(this, function ($) {
 
@@ -1614,15 +1597,6 @@
     var defaults = {
         fullScreen: true
     };
-
-    function isFullScreen() {
-        return (
-            document.fullscreenElement ||
-            document.mozFullScreenElement ||
-            document.webkitFullscreenElement ||
-            document.msFullscreenElement
-        );
-    }
 
     var Fullscreen = function(element) {
 
@@ -1648,7 +1622,7 @@
                 !document.mozFullScreenEnabled && !document.msFullscreenEnabled) {
                 return;
             } else {
-                fullScreen = '<button type="button" aria-label="Toggle fullscreen" class="lg-fullscreen lg-icon"></button>';
+                fullScreen = '<span class="lg-fullscreen lg-icon"></span>';
                 this.core.$outer.find('.lg-toolbar').append(fullScreen);
                 this.fullScreen();
             }
@@ -1689,10 +1663,11 @@
         });
 
         this.core.$outer.find('.lg-fullscreen').on('click.lg', function() {
-            if (isFullScreen()) {
-                _this.exitFullscreen();
-            } else {
+            if (!document.fullscreenElement &&
+                !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
                 _this.requestFullscreen();
+            } else {
+                _this.exitFullscreen();
             }
         });
 
@@ -1701,9 +1676,7 @@
     Fullscreen.prototype.destroy = function() {
 
         // exit from fullscreen if activated
-        if(isFullScreen()) {
-            this.exitFullscreen();
-        }
+        this.exitFullscreen();
 
         $(document).off('fullscreenchange.lg webkitfullscreenchange.lg mozfullscreenchange.lg MSFullscreenChange.lg');
     };
@@ -1820,9 +1793,9 @@
 
 }));
 
-/*! lg-thumbnail - v1.2.1 - 2020-06-13
+/*! lg-thumbnail - v1.1.0 - 2017-08-08
 * http://sachinchoolur.github.io/lightGallery
-* Copyright (c) 2020 Sachin N; Licensed GPLv3 */
+* Copyright (c) 2017 Sachin N; Licensed GPLv3 */
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -1830,13 +1803,13 @@
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
-  } else if (typeof module === 'object' && module.exports) {
+  } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
     module.exports = factory(require('jquery'));
   } else {
-    factory(root["jQuery"]);
+    factory(jQuery);
   }
 }(this, function ($) {
 
@@ -2265,7 +2238,7 @@
         var _this = this;
         if (_this.core.s.toogleThumb) {
             _this.core.$outer.addClass('lg-can-toggle');
-            _this.$thumbOuter.append('<button type="button" aria-label="Toggle thumbnails" class="lg-toogle-thumb lg-icon"></button>');
+            _this.$thumbOuter.append('<span class="lg-toogle-thumb lg-icon"></span>');
             _this.core.$outer.find('.lg-toogle-thumb').on('click.lg', function() {
                 _this.core.$outer.toggleClass('lg-thumb-open');
             });
@@ -2299,9 +2272,9 @@
 
 }));
 
-/*! lg-video - v1.3.0 - 2020-05-03
+/*! lg-video - v1.2.2 - 2018-05-01
 * http://sachinchoolur.github.io/lightGallery
-* Copyright (c) 2020 Sachin N; Licensed GPLv3 */
+* Copyright (c) 2018 Sachin N; Licensed GPLv3 */
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -2322,7 +2295,7 @@
 (function() {
     
         'use strict';
-
+    
         var defaults = {
             videoMaxWidth: '855px',
 
@@ -2336,44 +2309,44 @@
             videojs: false,
             videojsOptions: {}
         };
-
+    
         var Video = function(element) {
-
+    
             this.core = $(element).data('lightGallery');
-
+    
             this.$el = $(element);
             this.core.s = $.extend({}, defaults, this.core.s);
             this.videoLoaded = false;
-
+    
             this.init();
-
+    
             return this;
         };
-
+    
         Video.prototype.init = function() {
             var _this = this;
-
+    
             // Event triggered when video url found without poster
             _this.core.$el.on('hasVideo.lg.tm', onHasVideo.bind(this));
-
+    
             // Set max width for video
             _this.core.$el.on('onAferAppendSlide.lg.tm', onAferAppendSlide.bind(this));
-
+    
             if (_this.core.doCss() && (_this.core.$items.length > 1) && (_this.core.s.enableSwipe || _this.core.s.enableDrag)) {
                 _this.core.$el.on('onSlideClick.lg.tm', function() {
                     var $el = _this.core.$slide.eq(_this.core.index);
                     _this.loadVideoOnclick($el);
                 });
             } else {
-
+    
                 // For IE 9 and bellow
                 _this.core.$slide.on('click.lg', function() {
                     _this.loadVideoOnclick($(this));
                 });
             }
-
+    
             _this.core.$el.on('onBeforeSlide.lg.tm', onBeforeSlide.bind(this));
-
+    
             _this.core.$el.on('onAfterSlide.lg.tm', function(event, prevIndex) {
                 _this.core.$slide.eq(prevIndex).removeClass('lg-video-playing');
             });
@@ -2389,23 +2362,13 @@
                 });
             }
         };
-
+    
         Video.prototype.loadVideo = function(src, addClass, noPoster, index, html) {
-            var _this = this;
             var video = '';
             var autoplay = 1;
             var a = '';
             var isVideo = this.core.isVideo(src, index) || {};
-            var videoTitle;
-
-            if (_this.core.s.dynamic) {
-                videoTitle = _this.core.s.dynamicEl[_this.core.index].title;
-            } else {
-                videoTitle = _this.core.$items.eq(_this.core.index).attr('title') || _this.core.$items.eq(_this.core.index).find('img').first().attr('alt');
-            }
-
-            videoTitle = videoTitle ? 'title="' + videoTitle + '"' : '';
-
+    
             // Enable autoplay based on setting for first video if poster doesn't exist
             if (noPoster) {
                 if (this.videoLoaded) {
@@ -2414,53 +2377,53 @@
                     autoplay = this.core.s.autoplayFirstVideo ? 1 : 0;
                 }
             }
-
+    
             if (isVideo.youtube) {
-
+    
                 a = '?wmode=opaque&autoplay=' + autoplay + '&enablejsapi=1';
                 if (this.core.s.youtubePlayerParams) {
                     a = a + '&' + $.param(this.core.s.youtubePlayerParams);
                 }
-
-                video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" ' + videoTitle + ' width="560" height="315" src="//www.youtube.com/embed/' + isVideo.youtube[1] + a + '" frameborder="0" allowfullscreen></iframe>';
-
+    
+                video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315" src="//www.youtube.com/embed/' + isVideo.youtube[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+    
             } else if (isVideo.vimeo) {
-
+    
                 a = '?autoplay=' + autoplay + '&api=1';
                 if (this.core.s.vimeoPlayerParams) {
                     a = a + '&' + $.param(this.core.s.vimeoPlayerParams);
                 }
-
-                video = '<iframe class="lg-video-object lg-vimeo ' + addClass + '" ' + videoTitle + ' width="560" height="315"  src="//player.vimeo.com/video/' + isVideo.vimeo[1] + a + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
-
+    
+                video = '<iframe class="lg-video-object lg-vimeo ' + addClass + '" width="560" height="315"  src="//player.vimeo.com/video/' + isVideo.vimeo[1] + a + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+    
             } else if (isVideo.dailymotion) {
-
+    
                 a = '?wmode=opaque&autoplay=' + autoplay + '&api=postMessage';
                 if (this.core.s.dailymotionPlayerParams) {
                     a = a + '&' + $.param(this.core.s.dailymotionPlayerParams);
                 }
-
-                video = '<iframe class="lg-video-object lg-dailymotion ' + addClass + '" ' + videoTitle + ' width="560" height="315" src="//www.dailymotion.com/embed/video/' + isVideo.dailymotion[1] + a + '" frameborder="0" allowfullscreen></iframe>';
-
+    
+                video = '<iframe class="lg-video-object lg-dailymotion ' + addClass + '" width="560" height="315" src="//www.dailymotion.com/embed/video/' + isVideo.dailymotion[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+    
             } else if (isVideo.html5) {
                 var fL = html.substring(0, 1);
                 if (fL === '.' || fL === '#') {
                     html = $(html).html();
                 }
-
+    
                 video = html;
-
+    
             } else if (isVideo.vk) {
-
+    
                 a = '&autoplay=' + autoplay;
                 if (this.core.s.vkPlayerParams) {
                     a = a + '&' + $.param(this.core.s.vkPlayerParams);
                 }
-
-                video = '<iframe class="lg-video-object lg-vk ' + addClass + '" ' + videoTitle + ' width="560" height="315" src="//vk.com/video_ext.php?' + isVideo.vk[1] + a + '" frameborder="0" allowfullscreen></iframe>';
-
+    
+                video = '<iframe class="lg-video-object lg-vk ' + addClass + '" width="560" height="315" src="//vk.com/video_ext.php?' + isVideo.vk[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+    
             }
-
+    
             return video;
         };
 
@@ -2559,7 +2522,7 @@
                 }
             }
         };
-
+    
         Video.prototype.destroy = function() {
             this.videoLoaded = false;
         };
@@ -2645,17 +2608,16 @@
             }
 
         }
-
+    
         $.fn.lightGallery.modules.video = Video;
-
+    
     })();
-
 
 }));
 
-/*! lg-zoom - v1.2.1 - 2020-06-13
+/*! lg-zoom - v1.1.0 - 2017-08-08
 * http://sachinchoolur.github.io/lightGallery
-* Copyright (c) 2020 Sachin N; Licensed GPLv3 */
+* Copyright (c) 2017 Sachin N; Licensed GPLv3 */
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -2663,13 +2625,13 @@
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
-  } else if (typeof module === 'object' && module.exports) {
+  } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
     module.exports = factory(require('jquery'));
   } else {
-    factory(root["jQuery"]);
+    factory(jQuery);
   }
 }(this, function ($) {
 
@@ -2718,10 +2680,10 @@
     Zoom.prototype.init = function() {
 
         var _this = this;
-        var zoomIcons = '<button type="button" aria-label="Zoom in" id="lg-zoom-in" class="lg-icon"></button><button type="button" aria-label="Zoom out" id="lg-zoom-out" class="lg-icon"></button>';
+        var zoomIcons = '<span id="lg-zoom-in" class="lg-icon"></span><span id="lg-zoom-out" class="lg-icon"></span>';
 
         if (_this.core.s.actualSize) {
-            zoomIcons += '<button type="button" aria-label="Actual size" id="lg-actual-size" class="lg-icon"></button>';
+            zoomIcons += '<span id="lg-actual-size" class="lg-icon"></span>';
         }
 
         if (_this.core.s.useLeftForZoom) {
@@ -3283,9 +3245,9 @@
 
 }));
 
-/*! lg-share - v1.2.1 - 2020-06-13
+/*! lg-share - v1.1.0 - 2017-10-03
 * http://sachinchoolur.github.io/lightGallery
-* Copyright (c) 2020 Sachin N; Licensed GPLv3 */
+* Copyright (c) 2017 Sachin N; Licensed GPLv3 */
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -3293,13 +3255,13 @@
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
-  } else if (typeof module === 'object' && module.exports) {
+  } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
     module.exports = factory(require('jquery'));
   } else {
-    factory(root["jQuery"]);
+    factory(jQuery);
   }
 }(this, function ($) {
 
@@ -3333,26 +3295,22 @@
 
     Share.prototype.init = function() {
         var _this = this;
-
-        var shareHtml = '<button type="button" aria-label="Share" id="lg-share" class="lg-icon" aria-haspopup="true" aria-expanded="false">' +
+        var shareHtml = '<span id="lg-share" class="lg-icon">' +
             '<ul class="lg-dropdown" style="position: absolute;">';
         shareHtml += _this.core.s.facebook ? '<li><a id="lg-share-facebook" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.facebookDropdownText + '</span></a></li>' : '';
         shareHtml += _this.core.s.twitter ? '<li><a id="lg-share-twitter" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.twitterDropdownText + '</span></a></li>' : '';
         shareHtml += _this.core.s.googlePlus ? '<li><a id="lg-share-googleplus" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.googlePlusDropdownText + '</span></a></li>' : '';
         shareHtml += _this.core.s.pinterest ? '<li><a id="lg-share-pinterest" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.pinterestDropdownText + '</span></a></li>' : '';
-        shareHtml += '</ul></button>';
+        shareHtml += '</ul></span>';
 
         this.core.$outer.find('.lg-toolbar').append(shareHtml);
         this.core.$outer.find('.lg').append('<div id="lg-dropdown-overlay"></div>');
         $('#lg-share').on('click.lg', function(){
             _this.core.$outer.toggleClass('lg-dropdown-active');
-            var ariaExpanded = $('#lg-share').attr('aria-expanded');
-            $('#lg-share').attr('aria-expanded', ariaExpanded === 'true' ? false: true);
         });
 
         $('#lg-dropdown-overlay').on('click.lg', function(){
             _this.core.$outer.removeClass('lg-dropdown-active');
-            $('#lg-share').attr('aria-expanded', false);
         });
 
         _this.core.$el.on('onAfterSlide.lg.tm', function(event, prevIndex, index) {
@@ -3391,151 +3349,6 @@
 
 })();
 
-
-
-}));
-
-/*! lg-rotate - v1.1.0 - 2020-09-01
-* http://sachinchoolur.github.io/lightGallery
-* Copyright (c) 2020 Sachin N; Licensed GPLv3 */
-
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
-    define(['jquery'], function (a0) {
-      return (factory(a0));
-    });
-  } else if (typeof module === 'object' && module.exports) {
-    // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like environments that support module.exports,
-    // like Node.
-    module.exports = factory(require('jquery'));
-  } else {
-    factory(root["jQuery"]);
-  }
-}(this, function ($) {
-
-(function () {
-    'use strict';
-
-    var defaults = {
-        rotate: true,
-        rotateLeft: true,
-        rotateRight: true,
-        flipHorizontal: true,
-        flipVertical: true,
-    };
-
-    var Rotate = function (element) {
-        this.core = $(element).data('lightGallery');
-
-        this.core.s = $.extend({}, defaults, this.core.s);
-
-        if (this.core.s.rotate && this.core.doCss()) {
-            this.init();
-        }
-
-        return this;
-    };
-
-    Rotate.prototype.buildTemplates = function () {
-        var rotateIcons = '';
-        if (this.core.s.flipHorizontal) {
-            rotateIcons += '<button aria-label="Flip horizontal" class="lg-flip-hor lg-icon"></button>';
-        }
-        if (this.core.s.flipVertical) {
-            rotateIcons += '<button aria-label="flip vertical" class="lg-flip-ver lg-icon"></button>';
-        }
-        if (this.core.s.rotateLeft) {
-            rotateIcons += '<button aria-label="Rotate left" class="lg-rotate-left lg-icon"></button>';
-        }
-        if (this.core.s.rotateRight) {
-            rotateIcons += '<button aria-label="Rotate right" class="lg-rotate-right lg-icon"></button>';
-        }
-        this.core.$outer.find('.lg-toolbar').append(rotateIcons);
-    };
-
-    Rotate.prototype.init = function () {
-        var _this = this;
-        this.buildTemplates();
-
-        // Save rotate config for each item to persist its rotate, flip values
-        // even after navigating to diferent slides
-        this.rotateValuesList = {};
-
-
-        // event triggered after appending slide content
-        this.core.$el.on('onAferAppendSlide.lg.tm.rotate', function (event, index) {
-            // Get the current element
-            var $imageWrap = _this.core.$slide.eq(index).find('.lg-img-wrap');
-            $imageWrap.wrap('<div class="lg-img-rotate"></div>');
-        });
-
-        this.core.$outer
-            .find('.lg-rotate-left')
-            .on('click.lg', this.rotateLeft.bind(this));
-
-        this.core.$outer
-            .find('.lg-rotate-right')
-            .on('click.lg', this.rotateRight.bind(this));
-        this.core.$outer
-            .find('.lg-flip-hor')
-            .on('click.lg', this.flipHorizontal.bind(this));
-
-        this.core.$outer
-            .find('.lg-flip-ver')
-            .on('click.lg', this.flipVertical.bind(this));
-
-        // Reset rotate on slide change
-        this.core.$el.on('onBeforeSlide.lg.tm.rotate', function (event, prevIndex, index) {
-            if (!_this.rotateValuesList[index]) {
-                _this.rotateValuesList[index] = {
-                    rotate: 0,
-                    flipHorizontal: 1,
-                    flipVertical: 1,
-                };
-            }
-        });
-    };
-
-    Rotate.prototype.applyStyles = function () {
-        var $image = this.core.$slide.eq(this.core.index).find('.lg-img-rotate');
-        $image.css(
-            'transform',
-            'rotate(' + this.rotateValuesList[this.core.index].rotate + 'deg)' +
-            ' scale3d(' + this.rotateValuesList[this.core.index].flipVertical +
-            ', ' + this.rotateValuesList[this.core.index].flipHorizontal + ', 1)'
-        );
-    };
-
-    Rotate.prototype.rotateLeft = function () {
-        this.rotateValuesList[this.core.index].rotate -= 90;
-        this.applyStyles();
-    };
-
-    Rotate.prototype.rotateRight = function () {
-        this.rotateValuesList[this.core.index].rotate += 90;
-        this.applyStyles();
-    };
-
-    Rotate.prototype.flipHorizontal = function () {
-        this.rotateValuesList[this.core.index].flipHorizontal *= -1;
-        this.applyStyles();
-    };
-
-    Rotate.prototype.flipVertical = function () {
-        this.rotateValuesList[this.core.index].flipVertical *= -1;
-        this.applyStyles();
-    };
-
-    Rotate.prototype.destroy = function () {
-        // Unbind all events added by lightGallery rotate plugin
-        this.core.$el.off('.lg.tm.rotate');
-        this.rotateValuesList = {};
-    };
-
-    $.fn.lightGallery.modules.rotate = Rotate;
-})();
 
 
 }));
